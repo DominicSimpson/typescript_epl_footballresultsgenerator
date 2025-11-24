@@ -7,5 +7,18 @@ const fs_1 = __importDefault(require("fs"));
 // encoding the raw data so that it can be processed - returns as one large string
 const matches = fs_1.default.readFileSync('football.csv', {
     encoding: 'utf-8'
-});
-console.log(matches);
+})
+    .split('\n')
+    .map((row) => {
+    return row.split(',');
+}); // created array of arrays
+let manUnitedWins = 0;
+for (let match of matches) {
+    if (match[1] === 'Man United' && match[5] === 'H') {
+        manUnitedWins++;
+    }
+    else if (match[2] === 'Man United' && match[5] === 'A') {
+        manUnitedWins++;
+    }
+}
+console.log(`Man United won ${manUnitedWins} games`);
