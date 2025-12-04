@@ -1,4 +1,6 @@
 import fs from 'fs';
+import { dateStringToDate } from './utils';
+import { MatchResult } from './MatchResult';
 
 export class CsvFileReader {
     data: string[][] = [];
@@ -15,14 +17,17 @@ export class CsvFileReader {
                 (row: string): string[] => {
                     return row.split(',');  
                 }
-            ); // created array of arrays
-        
-        // enum - enumeration of match result
-        enum MatchResult {
-            HomeWin = 'H',
-            AwayWin = 'A',
-            Draw = 'D'
-        }; 
+            ) // created array of arrays
+            .map((row: string[]): any => {
+                return [
+                    dateStringToDate(row[0]),
+                    row[1],
+                    row[2],
+                    parseInt(row[3]),
+                    parseInt(row[4]),
+                    row[5] as MatchResult // 'H', 'A', 'D'
+                ];
+            });
     }
 }
 
