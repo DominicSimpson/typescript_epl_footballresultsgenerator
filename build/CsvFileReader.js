@@ -18,15 +18,8 @@ class CsvFileReader {
             .split('\n')
             .map((row) => {
             return row.split(',');
-        }); // created array of arrays
-        // enum - enumeration of match result
-        let MatchResult;
-        (function (MatchResult) {
-            MatchResult["HomeWin"] = "H";
-            MatchResult["AwayWin"] = "A";
-            MatchResult["Draw"] = "D";
-        })(MatchResult || (MatchResult = {}));
-        ;
+        }) // created array of arrays
+            .map(this.mapRow);
     }
 }
 exports.CsvFileReader = CsvFileReader;
